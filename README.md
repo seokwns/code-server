@@ -1,14 +1,10 @@
 # code-server
 code-server 설치 과정입니다.
 
-
-
-
-
-
+</br>
+</br>
 
 ### 서론
-
 노트북을 들고다니기엔 무리가 있어 아이패드로 코딩을 해야하는 상황이 왔습니다. 앱스토어에 있던 'code' 라는 앱은 데스크탑의 vs-code와 상당히 비슷한 환경이었으나 모바일-PC 환경 전환이 용이하지 못하였고, 버그가 많아서 사용하는데 불편함이 많았습니다. 그래서 아이패드에서 코딩을 할 수 있는 환경 구축을 위해 처음 생각한 내용은 '원격 데스크탑' 프로그램을 이용하는 것이었습니다.
 
 원격 데스크탑은 집에 있는 PC를 그대로 사용가능 하였지만, 네트워크 연결이 매끄럽지 못하였고 해상도 문제가 심하여 사용하기 힘들었습니다. 그래서 다른 방법을 찾게된게 바로 code-server를 통한 vs-code 사용하기입니다.
@@ -26,14 +22,10 @@ code-server를 사용하면, 웹에서 vs-code를 즉각적으로 사용가능�
 
 - OS: Ubuntu 22.04 LTS
 
-
-
-
-
-
+</br>
+</br>
 
 ### 설치
-
 저는 간편한 설치스크립트를 사용하였습니다.
 
 우선 기본 패키지 업데이트를 진행하였습니다.
@@ -59,14 +51,10 @@ sudo iptables -I INPUT 5 -i ens3 -p tcp --dport 8080 -m state --state NEW,ESTABL
 
 기본적으로 HTTP(80), HTTPS(443), code-server에서 사용할 포트(8080) 를 열어줍니다.
 
-
-
-
-
-
+</br>
+</br>
 
 ### code-server 설정
-
 code-server를 서비스로 실행하기 위해 systemctl로 enable 시킵니다.
 
 ```bash
@@ -96,14 +84,10 @@ sudo systemctl restart --now code-server@$USER
 
 이로써 기본적인 구동과정은 마무리 됩니다. 하지만 데이터 암호화를 위해 cert를 설정할 필요가 있습니다.
 
-
-
-
-
-
+</br>
+</br>
 
 ### cert 보안 설정
-
 config.yaml 파일에서 cert를 true로 변경해줍니다.
 
 ```yaml
@@ -161,14 +145,10 @@ cert-key: path_to_your_cert_folder/cert_name-key.pem
 
 cert 발급과 관련된 정보는 금방 찾았고 이렇게 깃허브 이슈를 통해 해결하는 과정이 처음이라 생소하였지만 하나하나 배우는 의미가 쏠쏠한 시간들이었습니다.
 
-
-
-
-
-
+</br>
+</br>
 
 ### extension 수동설치
-
 code-server로 구동시킨 vs-code에서는 c/c++ extension을 사용할 수 없습니다. 따라서 보다 쉬운 컴파일 환경을 구축하기 위해서 수동으로 설치하였습니다.
 
 우선 c/c++ extension 깃허브로 가서 배포 자료 중 리눅스 환경의 자료를 다운받고 옮겨줍니다.
