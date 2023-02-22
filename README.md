@@ -162,3 +162,44 @@ code-server --install-extension <vsix 파일 위치>
 ```
 
 이외 다른 extension 또한 동일한 방법으로 설치하면 적용됩니다.
+
+
+
+
+
+</br>
+</br>
+</br>
+
+### React Web Socket 서버 기본 경로 설정
+개발을 진행하다보면 문제점을 하나 발견할 수 있습니다. 로컬에서 개발할 때는 잘만 작동하던 HMR(Hot Module Replacement)이 작동을 하지 않는다는 것 입니다.
+
+webpack은 내부적으로 Web Socket 서버와 통신을 하면서 HMR을 구현하기 때문에 HMR을 위해서는 webpack 설정을 통해 Web Socket 서버 경로를 변경해주어야 합니다. craco 를 이용하여 webpack 설정을 변경했습니다.
+
+</br>
+현재 리액트 프로젝트 루트 경로에서 터미널을 열고 아래와 같이 입력해줍니다.
+```bash
+npm install @craco/craco@alpha --save
+```
+
+</br>
+설치가 완료되면 프로젝트 루트 경로에 craco.config.js 파일을 생성하고 아래와 같이 작성합니다.
+```javascript
+module.exports = {
+  devServer: (devServerConfig) => {
+    devServerConfig.webSocketServer = {
+      options: { path: process.env.PUBLIC_URL + "/ws" },
+    };
+
+    return devServerConfig;
+  },
+};
+```
+
+</br>
+다음으로 프로젝트 루트 경로에 있는 package.json 파일에서 script 부분을 아래와 같이 수정합니다.
+```json
+"scripts": {
+	"start": "PUBLIC_URL='/absproxy/3000' WDS_SOCKET_PORT=0 craco start",
+}
+```
