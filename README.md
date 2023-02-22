@@ -177,13 +177,17 @@ code-server --install-extension <vsix 파일 위치>
 webpack은 내부적으로 Web Socket 서버와 통신을 하면서 HMR을 구현하기 때문에 HMR을 위해서는 webpack 설정을 통해 Web Socket 서버 경로를 변경해주어야 합니다. craco 를 이용하여 webpack 설정을 변경했습니다.
 
 </br>
+
 현재 리액트 프로젝트 루트 경로에서 터미널을 열고 아래와 같이 입력해줍니다.
+
 ```bash
 npm install @craco/craco@alpha --save
 ```
 
 </br>
+
 설치가 완료되면 프로젝트 루트 경로에 craco.config.js 파일을 생성하고 아래와 같이 작성합니다.
+
 ```javascript
 module.exports = {
   devServer: (devServerConfig) => {
@@ -197,7 +201,9 @@ module.exports = {
 ```
 
 </br>
+
 다음으로 프로젝트 루트 경로에 있는 package.json 파일에서 script 부분을 아래와 같이 수정합니다.
+
 ```json
 "scripts": {
 	"start": "PUBLIC_URL='/absproxy/3000' WDS_SOCKET_PORT=0 craco start",
